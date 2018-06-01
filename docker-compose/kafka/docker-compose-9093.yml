@@ -1,0 +1,17 @@
+version: '3.1'
+
+services:
+  kafka:
+    image: wurstmeister/kafka
+    restart: always
+    hostname: kafka
+    ports:
+      - 9093:9092
+    volumes:
+      - "~/share/docker/compose-data/kafka/kafka-9093/docker.sock:/var/run/docker.sock"
+      - "~/share/docker/compose-data/kafka/kafka-9093:/kafka"
+    environment:
+      KAFKA_VERSION: 1.1.0
+      KAFKA_ADVERTISED_HOST_NAME: 192.168.1.6
+      KAFKA_ADVERTISED_PORT: 9093
+      KAFKA_ZOOKEEPER_CONNECT: 192.168.1.6:2182,192.168.1.6:2183,192.168.1.6:2184
