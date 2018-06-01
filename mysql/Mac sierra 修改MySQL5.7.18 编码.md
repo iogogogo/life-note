@@ -2,7 +2,7 @@
 
 如果查询出来不是utf8的结果集，那么就需要修改了
 
- ![img](https://upload-images.jianshu.io/upload_images/7779890-3d64f07638b7ddf3.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/700)
+ ![img](images/7779890-3d64f07638b7ddf3.jpg)
 
 **2.新建 my.cnf 文件**
 
@@ -10,7 +10,7 @@
 
 **在文件中编写**
 
- ![img](https://upload-images.jianshu.io/upload_images/7779890-a2ae382e9a88f5c7.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/610)
+ ![img](images/7779890-a2ae382e9a88f5c7.jpg)
 
 ```shell
 [mysqld]
