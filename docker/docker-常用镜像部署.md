@@ -150,7 +150,13 @@ sudo chmod -R 777 ~/share/docker/data/jenkins
 
 docker run -dit --name jenkins \
 -v /etc/localtime:/etc/localtime \
+# 设置Jenkins时区
+-e JAVA_OPTS=-Duser.timezone=Asia/Shanghai \
 -v ~/share/docker/data/jenkins:/var/jenkins_home \
+# 映射容器中的基本环境
+-v /usr/local/jdk1.8.0_171:/usr/local/jdk1.8.0_171 \
+-v /usr/local/apache-maven-3.5.3:/usr/local/apache-maven-3.5.3 \
+-v /usr/local/gradle-4.5:/usr/local/gradle-4.5 \
 -p 18000:8080 \
 -p 50000:50000 \
 jenkins:2.60.3
