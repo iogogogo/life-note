@@ -166,6 +166,27 @@ docker network connect docker-network jenkins
 jenkis用户名密码：jenkis/jenkis
 ```
 
+### nginx
+
+```shell
+# 运行临时容器
+docker run -dit --rm --name some-nginx nginx
+
+# 复制Nginx文件
+docker cp some-nginx:/etc/nginx/ ~/share/docker/data/
+
+# 停止临时容器
+docker stop some-nginx
+
+# 运行Nginx容器
+docker run -dit --name nginx \
+-v ~/share/docker/data/nginx/logs:/var/log/nginx \
+-v ~/share/docker/data/nginx:/etc/nginx \
+-p 80:80 \
+-p 443:443 \
+nginx
+```
+
 # elk 部署脚本
 
 ### 启动顺序
