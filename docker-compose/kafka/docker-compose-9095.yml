@@ -8,8 +8,8 @@ services:
     ports:
       - 9095:9092
     volumes:
-      - "~/share/docker/compose-data/kafka/kafka-9095/docker.sock:/var/run/docker.sock"
-      - "~/share/docker/compose-data/kafka/kafka-9095:/kafka"
+      - "./kafka/kafka-9095/docker.sock:/var/run/docker.sock"
+      - "./kafka/kafka-9095:/kafka"
     environment:
       KAFKA_VERSION: 1.1.0
       KAFKA_ADVERTISED_HOST_NAME: 192.168.1.6

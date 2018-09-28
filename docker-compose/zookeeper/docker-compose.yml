@@ -8,9 +8,9 @@ services:
     ports:
       - 2184:2181
     volumes:
-      - "~/share/docker/compose-data/zookeeper/zoo1/data:/data"
-      - "~/share/docker/compose-data/zookeeper/zoo1/datalog:/datalog"
-      - "~/share/docker/compose-data/zookeeper/zoo1/conf:/conf"
+      - "./zookeeper/zoo1/data:/data"
+      - "./zookeeper/zoo1/datalog:/datalog"
+      - "./zookeeper/zoo1/conf:/conf"
     environment:
       ZOO_MY_ID: 1
       ZOO_SERVERS: server.1=0.0.0.0:2888:3888 server.2=zoo2:2888:3888 server.3=zoo3:2888:3888
@@ -22,9 +22,9 @@ services:
     ports:
       - 2182:2181
     volumes:
-      - "~/share/docker/compose-data/zookeeper/zoo2/data:/data"
-      - "~/share/docker/compose-data/zookeeper/zoo2/datalog:/datalog"
-      - "~/share/docker/compose-data/zookeeper/zoo2/conf:/conf"
+      - "./zookeeper/zoo2/data:/data"
+      - "./zookeeper/zoo2/datalog:/datalog"
+      - "./zookeeper/zoo2/conf:/conf"
     environment:
       ZOO_MY_ID: 2
       ZOO_SERVERS: server.1=zoo1:2888:3888 server.2=0.0.0.0:2888:3888 server.3=zoo3:2888:3888
@@ -36,9 +36,9 @@ services:
     ports:
       - 2183:2181
     volumes:
-      - "~/share/docker/compose-data/zookeeper/zoo3/data:/data"
-      - "~/share/docker/compose-data/zookeeper/zoo3/datalog:/datalog"
-      - "~/share/docker/compose-data/zookeeper/zoo3/conf:/conf"
+      - "./zookeeper/zoo3/data:/data"
+      - "./zookeeper/zoo3/datalog:/datalog"
+      - "./zookeeper/zoo3/conf:/conf"
     environment:
       ZOO_MY_ID: 3
       ZOO_SERVERS: server.1=zoo1:2888:3888 server.2=zoo2:2888:3888 server.3=0.0.0.0:2888:3888

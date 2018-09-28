@@ -1,0 +1,61 @@
+apply plugin: 'maven-publish'
+
+ext {
+
+    GROUP_ID = project.group
+    ARTIFACT_ID = project.archivesBaseName
+    VERSION = project.version
+
+    // String host = "http://192.168.31.230:18081/"
+    String host = "http://127.0.0.1:8081/"
+    MAVEN_REPO_RELEASE_URL = "${host}repository/releases"
+    MAVEN_REPO_SNAPSHOT_URL = "${host}repository/snapshots"
+    MAVEN_DEPLOY_URL = project.version.endsWith('SNAPSHOT') ? MAVEN_REPO_SNAPSHOT_URL : MAVEN_REPO_RELEASE_URL
+    MAVEN_DEPLOY_USER = "admin"
+    MAVEN_DEPLOY_PASSWORD = "admin123"
+}
+
+// 打包源码
+task sourceJar(type: Jar) {
+    from sourceSets.main.allJava
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            // 指定group/artifact/version信息，可以不填。
+            // 默认使用项目group/name/version作为groupId/artifactId/version
+            groupId = GROUP_ID
+            artifactId = ARTIFACT_ID
+            version = VERSION
+            // 如果是war包填写components.web，如果是jar包填写components.java
+            from components.java
+
+            //配置上传源码
+            artifact sourceJar {
+                classifier "sources"
+            }
+
+            pom.withXml {
+                asNode().dependencies.'*'.findAll() {
+                    it.scope.text() == 'runtime' && project.configurations.compile.allDependencies.find { dep ->
+                        dep.name == it.artifactId.text()
+                    }
+                }.each() {
+                    it.scope*.value = 'compile'
+                }
+            }
+        }
+    }
+    repositories {
+        maven {
+            // 远程仓库地址
+            url = MAVEN_DEPLOY_URL
+            // 认证用户和密码
+            credentials {
+                username = MAVEN_DEPLOY_USER
+                password = MAVEN_DEPLOY_PASSWORD
+            }
+        }
+    }
+}

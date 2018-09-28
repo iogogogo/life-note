@@ -27,3 +27,6 @@ cd /opt/kafka/
 ## 消费消息
 ./bin/kafka-console-consumer.sh --bootstrap-server 192.168.1.6:9095 --topic test --from-beginning
 ```
+
+## 关于 *KAFKA_ADVERTISED_HOST_NAME* 属性
+https://www.jianshu.com/p/2db7abddb9e6
