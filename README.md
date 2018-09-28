@@ -1,1 +1,2 @@
-# ife-note
+# life-note
+日常笔记
