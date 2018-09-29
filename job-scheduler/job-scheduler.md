@@ -112,7 +112,7 @@ XXL-JOB调度模块基于Quartz集群实现，其“调度数据库”是在Quar
   - 集群机器时钟保持一致
   - 推荐通过nginx为调度中心集群做负载均衡，分配域名。调度中心访问、执行器回调配置、调用API服务等操作均通过该域名进行。
 
-![安装包内容](../resources/images/job-admin-pkg.png)
+![安装包内容](../resources/images/job-scheduler/job-admin-pkg.png)
 
 ## 执行器部署
 
@@ -126,11 +126,11 @@ XXL-JOB调度模块基于Quartz集群实现，其“调度数据库”是在Quar
 
 
 
-![执行器](../resources/images/job-executor-pkg.jpg)
+![执行器](../resources/images/job-scheduler/job-executor-pkg.jpg)
 
 
 
-![执行器配置](../resources/images/executor-config.jpg)
+![执行器配置](../resources/images/job-scheduler/executor-config.jpg)
 
 
 
