@@ -1,0 +1,1 @@
+通过maven的assembly插件，将项目文件进行打包归纳整理，该dockerfile可将程序打包成docker镜像部署运行
