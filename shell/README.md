@@ -38,6 +38,35 @@ jps
 
 ```
 
+
+
+- 通用
+
+```shell
+#!/bin/bash
+
+programJar=$1
+
+#上一个进程pid
+programId=`ps aux |grep java |grep ${programJar} |awk -F' ' '{print $2}'`
+
+# ps -ef | grep $JARFILE | grep -v grep | awk '{print $2}' | xargs kill -9
+
+if [ "${programId}" != "" ];then
+    kill -9 ${programId}
+    echo "kill ${programId}"
+fi
+sleep 1
+
+nohup java -jar -Xmx512m -Xss512k $(pwd)/${programJar} >  /dev/null 2>&1 &
+
+sleep 5
+
+jps
+```
+
+
+
 # jar 指定classpath
 
 java -cp 需要指定classpath的完全路径【$(pwd)/xxx.jar】，否则进程名称为jar
