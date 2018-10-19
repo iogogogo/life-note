@@ -70,11 +70,6 @@ subprojects {
     // code coverage
     check.dependsOn jacocoTestReport
 
-    configurations.all {
-        // check for updates every build SNAPSHOT 变化实时获取
-        resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
-    }
-
     // JavaDoc utf8
     tasks.withType(Javadoc) {
         options.addStringOption('Xdoclint:none', '-quiet')
