@@ -70,18 +70,32 @@ subprojects {
     // code coverage
     check.dependsOn jacocoTestReport
 
-    // JavaDoc utf8
-    tasks.withType(Javadoc) {
-        options.addStringOption('Xdoclint:none', '-quiet')
-        options.addStringOption('encoding', 'UTF-8')
-        options.addStringOption('charSet', 'UTF-8')
-    }
-
     apply from: '../gradle/common.gradle'
 
     dependencies {
 
     }
+    
+    // 打包zip文件
+    task zip(type: Zip, dependsOn: jar) {
+        // 包含某个目录下面的所有文件
+        from('build/libs', 'src/main/resources', '../script', 'docker')
+        // 排除文件
+        exclude('application-*.yml', "${archivesBaseName}-${this.version}.jar")
+        // 包含文件
+        // include()
+        appendix("archive")
+        into('tools') {
+            from 'tools'
+        }
+        into('ios_local') {
+            from 'ios_local'
+        }
+        version "${this.version}"
+        baseName "${archivesBaseName}"
+    }
+
+    check.dependsOn(zip)
 }
 ```
 
