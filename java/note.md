@@ -93,3 +93,13 @@ public static String[] translateCommandline(String toProcess) {
 }
 ```
 
+# 读取resource目录下的properties文件
+
+```java
+InputStream stream = ClassLoader.getSystemResourceAsStream("xxx.properties");
+BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
+Properties properties = new Properties();
+properties.load(reader);
+System.out.println(properties.getProperty("xxx.name", "123"));
+```
+
