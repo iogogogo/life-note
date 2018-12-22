@@ -1,5 +1,3 @@
-[TOC]
-
 # Mac brew
 
 https://juejin.im/post/5a561685f265da3e2b164fe7
@@ -31,6 +29,58 @@ yum -y install bash-completion-extras
 ```shell
 source /etc/profile.d/bash_completion.sh 
 ```
+
+# tar 命令
+
+```shell
+# 压缩当前目录下文件夹/文件test到test.tar.gz:
+tar -zcvf test.tar.gz test
+
+# 解压缩当前目录下的file.tar.gz到file:
+tar -zxvf file.tar.gz
+
+# 在不解压的情况下查看压缩包的内容：
+tar -tf test.tar.gz
+
+# tar批量压缩目录
+ls -F | grep '/$' | awk -F '/'  '{print $1".tar.gz"}''{print $1"/"}' | xargs -n2 tar czvf
+
+ls -F | grep '/$' | sed  -r -n 's/\///gp' | sed  's/.*/&.tar.gz &/' | xargs -n2 tar -cvf
+
+ls -F | grep '/$' | sed 's/\(.*\)\//\1.tar.gz \1/' | xargs -n2 tar -cvf
+```
+
+### 参数详解
+
+**五个命令中必选一个**
+
+​     -c: 建立压缩档案
+
+​     -x：解压
+
+​     -t：查看内容
+
+​     -r：向压缩归档文件末尾追加文件
+
+​     -u：更新原压缩包中的文件
+
+**这几个参数是可选的**
+
+​     -z：有gzip属性的
+
+​     -j：有bz2属性的
+
+​     -Z：有compress属性的
+
+​     -v：显示所有过程
+
+​     -O：将文件解开到标准输出
+
+**-f必选参数**
+
+-f: 使用档案名字，这个参数是最后一个参数，后面只能接档案名。
+
+
 
 
 
