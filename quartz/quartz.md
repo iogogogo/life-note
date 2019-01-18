@@ -1,4 +1,4 @@
-# SpringBoot 整合 Quartz 实现依赖数据库数据动态设置定时任务
+# Spring Boot 设置定时任务
 
 - 任务配置
 
@@ -41,7 +41,7 @@ public class App {
 }
 ```
 
-## Quartz 实现动态设置定时任务
+## Spring Boot 结合 Quartz 实现动态设置定时任务
 
 - 需要spring boot版本大于2.x
 - http://www.quartz-scheduler.org/
