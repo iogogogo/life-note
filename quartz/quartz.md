@@ -69,9 +69,8 @@ import org.springframework.scheduling.quartz.AdaptableJobFactory;
 import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 import org.springframework.stereotype.Component;
 
-
 /**
- * Created by tao.zeng on 2019/1/16.
+ * Created by tao.zeng on 2019/1/18.
  */
 @Configuration
 public class QuartzConfiguration {
@@ -123,7 +122,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * Created by tao.zeng on 2019/1/16.
+ * Created by tao.zeng on 2019/1/18.
  */
 @Data
 @NoArgsConstructor
@@ -176,14 +175,13 @@ public class QuartzJob {
      * 任务名
      */
     private String jobName;
-
 }
 ```
 
 ### 新建一个统一的QuartzManager，用来统一管理job
 
 ```java
-package com.iogogogo.quartz;
+package com.iogogogo.quartz.configure;
 
 import com.iogogogo.quartz.bean.QuartzJob;
 import lombok.extern.slf4j.Slf4j;
@@ -196,7 +194,7 @@ import static org.quartz.JobBuilder.newJob;
 import static org.quartz.TriggerBuilder.newTrigger;
 
 /**
- * Created by tao.zeng on 2019/1/16.
+ * Created by tao.zeng on 2019/1/18.
  */
 @Slf4j
 @Component
@@ -282,10 +280,10 @@ public class QuartzManager {
 }
 ```
 
-### 新建job任务
+### 新建job任务，实现org.quartz.Job接口
 
 ```java
-package com.iogogogo.quartz.job;
+package com.iogogogo.quartz.schedule;
 
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.Job;
@@ -297,12 +295,12 @@ import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
 /**
- * Created by tao.zeng on 2019/1/16.
+ * Created by tao.zeng on 2019/1/18.
  */
 @Slf4j
 @Component
 public class ScheduleTask implements Job {
-
+    
     @Override
     public void execute(JobExecutionContext context) {
         log.info("execute task:{}", LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss", Locale.CHINA)));
@@ -315,8 +313,8 @@ public class ScheduleTask implements Job {
 ```java
 package com.iogogogo.quartz;
 
-import com.iogogogo.quartz.QuartzManager;
 import com.iogogogo.quartz.bean.QuartzJob;
+import com.iogogogo.quartz.configure.QuartzManager;
 import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -324,7 +322,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * Created by tao.zeng on 2019/1/16.
+ * Created by tao.zeng on 2019/1/18.
  */
 @SpringBootApplication
 public class QuartzSchedulerApplication implements CommandLineRunner {
@@ -332,15 +330,14 @@ public class QuartzSchedulerApplication implements CommandLineRunner {
     @Autowired
     private QuartzManager quartzManager;
 
-    public static void main(String[] args) {
+    public static void main(String... args) {
         SpringApplication.run(QuartzSchedulerApplication.class, args);
     }
 
     @Override
     public void run(String... args) {
-
         try {
-	        String scheduleTask = "com.iogogogo.quartz.job.ScheduleTask";
+            String scheduleTask = "com.iogogogo.quartz.schedule.ScheduleTask";
             QuartzJob job = new QuartzJob(scheduleTask,
                     "*/1 * * * * ?",
                     scheduleTask,
