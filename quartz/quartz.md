@@ -49,6 +49,8 @@ public class App {
 ### 添加依赖配置
 
 ```groovy
+implementation 'org.quartz-scheduler:quartz:2.3.0'
+implementation 'org.quartz-scheduler:quartz-jobs:2.3.0'
 implementation 'org.springframework.boot:spring-boot-starter-quartz'
 ```
 
