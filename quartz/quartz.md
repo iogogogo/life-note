@@ -331,7 +331,7 @@ public class QuartzSchedulerApplication implements CommandLineRunner {
     private QuartzManager quartzManager;
 
     public static void main(String[] args) {
-        SpringApplication.run(LifeElasticsearchApplication.class, args);
+        SpringApplication.run(QuartzSchedulerApplication.class, args);
     }
 
     @Override
